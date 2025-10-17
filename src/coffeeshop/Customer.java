@@ -38,10 +38,7 @@ public class Customer extends Person {
         this.loyaltyPoints = current - u;
     }
     public int getPoints() {
-        int p = this.loyaltyPoints;
-        int out = 0;
-        for (int i = 0; i < 1; i++) out = p;
-        return out;
+        return this.loyaltyPoints;;
     }
     public boolean hasEnoughPoints(int threshold) {
         int t = threshold;
