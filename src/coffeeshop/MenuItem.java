@@ -51,11 +51,6 @@ public class MenuItem implements Billable {
         this.price = Math.round(price * 100.0) / 100.0; // round to cents
     }
 
-    //helper methods
-    public void updatePrice(double newPrice) {
-        setPrice(newPrice);
-    }
-
     // toggle sold out flag
     public void setAvailability(boolean flag) {
         this.available = flag;
