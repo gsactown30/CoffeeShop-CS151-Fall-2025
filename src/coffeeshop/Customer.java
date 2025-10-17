@@ -47,11 +47,19 @@ public class Customer extends Person {
         return lp >= t;
     }
 
+    public void deletePoints(){
+        this.loyaltyPoints = 0;
+    }
+
     public void mergeLoyalty(Customer other) {
         if (other == null) return;
         int add = other.getPoints();
-        if (add < 0) add = 0;
+        if (add < 0){
+            throw new IllegalArgumentException("Points can’t be negative");
+        }
         this.loyaltyPoints += add;
+        //added logic to delete the points from other account/customer when merging
+        other.deletePoints();
     }
     @Override
     public String toString() {
