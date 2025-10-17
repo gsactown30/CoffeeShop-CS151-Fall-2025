@@ -53,11 +53,17 @@ public class Order {
             int q = quantities.get(i);
             sum += item.calculateTotal(q);
         }
-        return Math.round(sum * 100.0) / 100.0;
+        return roundPrice(sum);
     }
     public int getItemCount() {
         return items.size();
     }
+
+    //helper method to round price
+    public double roundPrice(double price){
+        return Math.round(price * 100.0) / 100.0;
+    }
+
     @Override
     public String toString() {
         String cid = String.valueOf(getOrderId());

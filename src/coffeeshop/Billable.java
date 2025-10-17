@@ -12,6 +12,8 @@ public interface Billable {
 
     boolean isAvailable();
 
+    double roundPrice();
+
 }
 
 

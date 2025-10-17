@@ -48,7 +48,7 @@ public class MenuItem implements Billable {
         if (price < 0) {
             throw new InvalidOrderException("price can’t be negative");
         }
-        this.price = Math.round(price * 100.0) / 100.0; // round to cents
+        this.price = roundPrice(price); // round to cents
     }
 
     // toggle sold out flag
@@ -62,7 +62,7 @@ public class MenuItem implements Billable {
             throw new InvalidOrderException("discount must be 0..100");
         }
         double discounted = price * (1 - percent / 100.0);
-        return Math.round(discounted * 100.0) / 100.0; // round to cents
+        return roundPrice(discounted); // round to cents
     }
 
     // price math with quantity + availability check
@@ -75,7 +75,7 @@ public class MenuItem implements Billable {
             throw new InvalidOrderException("item '" + name + "' is unavailable");
         }
         double total = price * qty;
-        return Math.round(total * 100.0) / 100.0; // round to cents
+        return roundPrice(total); // round to cents
     }
 
     // billable interface
@@ -91,6 +91,11 @@ public class MenuItem implements Billable {
 
     @Override
     public boolean isAvailable() { return available; }
+
+    @Override
+    public double roundPrice(double price){
+        return Math.round(price * 100.0) / 100.0;
+    }
 
     // static helpers
 
