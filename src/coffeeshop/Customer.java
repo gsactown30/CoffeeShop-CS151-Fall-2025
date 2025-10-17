@@ -24,27 +24,35 @@ public class Customer extends Person {
         System.out.println(sb.toString());
     }
     public void addPoints(int points) {
-        int p = points;
-        if (p < 0) p = 0;
-        int total = this.loyaltyPoints + p;
-        if (total < 0) total = 0;
-        this.loyaltyPoints = total;
+        if (points < 0){
+            throw new IllegalArgumentException("Points can't be negative");
+        }
+        this.loyaltyPoints += points;
     }
     public void redeemPoints(int used) {
-        int u = used;
-        if (u < 0) u = 0;
-        int current = this.loyaltyPoints;
-        if (u > current) u = current;
-        this.loyaltyPoints = current - u;
+        if (used < 0){
+            throw new IllegalArgumentException("Points used can't be negative");
+        }
+        if (this.hasEnoughPoints(used)){
+            this.loyaltyPoints -= used;
+        }
+        else{
+            System.out.println("Not enough points needed to redeem");
+        }
     }
     public int getPoints() {
         return this.loyaltyPoints;;
     }
     public boolean hasEnoughPoints(int threshold) {
-        int t = threshold;
-        if (t < 0) t = 0;
-        int lp = getPoints();
-        return lp >= t;
+        if (threshold < 0){
+            throw new IllegalArgumentException("Threshold can't be negative");
+        }
+        if (threshold < this.loyaltyPoints){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public void deletePoints(){
@@ -55,7 +63,7 @@ public class Customer extends Person {
         if (other == null) return;
         int add = other.getPoints();
         if (add < 0){
-            throw new IllegalArgumentException("Points can’t be negative");
+            throw new IllegalArgumentException("Points can't be negative");
         }
         this.loyaltyPoints += add;
         //added logic to delete the points from other account/customer when merging
